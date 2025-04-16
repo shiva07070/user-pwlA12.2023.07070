@@ -1,6 +1,6 @@
 <?php 
 session_start(); // Memulai session
-require "fungsi.php"; // Pastikan koneksi ke database benar
+require "koneksi.php"; // Pastikan koneksi ke database benar
 
 // Jika sudah login, redirect ke homeadmin.php
 if (isset($_SESSION['iduser'])) { 
@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (!empty($username) && !empty($passw)) {
         // Gunakan prepared statement untuk mencegah SQL Injection
         $sql1 = "SELECT * FROM user WHERE username = ?";
-        $stmt = $koneksi->prepare($sql1);
+        $stmt = $conn->prepare($sql1);
         $stmt->bind_param('s', $username);
         $stmt->execute();
         $result = $stmt->get_result();
